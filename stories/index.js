@@ -20,7 +20,13 @@ import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
 
 // appointment component
+import Appointment from "components/Appointment/index.js";
+import Header from "components/Appointment/Header.js";
+import Empty from "components/Appointment/Empty.js";
 
+// STORIES ====
+
+//  stories - buttons
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -47,7 +53,8 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
   .add("Clickable", () => (
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
   ));
-
+  
+  // stories - days
   const days = [
     {
       id: 1,
@@ -76,6 +83,8 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
     .add("Tuesday", () => (
       <DayList days={days} day={"Tuesday"} setDay={action("setDay")} />
     ));
+
+    // stories - interviewers
 
     const interviewer = {
       id: 1,
@@ -137,3 +146,29 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
           />
         ));
       
+
+// stories - appointments
+
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: 'white', value: '#fff', default: true }]
+  })
+  .add("Appointment", () => <Appointment />)
+  .add("Appointment with Time", () => (
+    <Appointment 
+      time={'12pm'}
+    />
+  ))
+  .add("Header", () => (
+    <Header />
+  ))
+  .add("Header with Time", () => (
+    <Header 
+    time={'12pm'}
+    />
+  ))
+  .add("Empty", () => (
+    <Empty
+    onAdd={action("onAdd")}
+    />
+  ))
