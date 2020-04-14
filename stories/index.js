@@ -3,17 +3,23 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
+// styles
 import "index.scss";
 import "styles/variables.scss";
 import "styles/mixins.scss";
 import "components/InterviewerList.scss";
 import "components/InterviewerListItem.scss";
 
+// days component
 import Button from "components/Button";
 import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
+
+// interviewers component
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
+
+// appointment component
 
 storiesOf("Button", module)
   .addParameters({
@@ -101,7 +107,7 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
           id={interviewer.id}
           name={interviewer.name}
           avatar={interviewer.avatar}
-          setInterviewer={action("setInterviewer")}
+          setInterviewer={event => action("setInterviewer")(interviewer.id)}
         />
       ));
 
