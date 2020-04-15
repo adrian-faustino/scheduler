@@ -19,6 +19,17 @@ export default function Form(props) {
     setInterviewer(e);
   }
 
+  // resets all state in the form
+  function reset() {
+    setName('');
+    setInterviewer(null);
+  }
+
+  function cancel() {
+    reset();
+    onCancel();
+  }
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -36,7 +47,7 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button
-          onClick={onCancel}
+          onClick={cancel}
           danger>Cancel</Button>
           <Button
           onClick={onSave}
