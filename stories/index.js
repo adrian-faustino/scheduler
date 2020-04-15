@@ -27,6 +27,7 @@ import Show from "components/Appointment/Show.js";
 import Confirm from "components/Appointment/Confirm.js";
 import Status from "components/Appointment/Status.js";
 import Error from "components/Appointment/Error.js";
+import Form from "components/Appointment/Form.js";
 
 // STORIES ====
 
@@ -200,5 +201,14 @@ storiesOf("Appointment", module)
     <Error
     message={"Could not delete appointment."}
     onClose={action("onClose")}
+    />
+  ))
+  .add("Form", () => (
+    <Form
+    name={"Adrian Faustino"}
+    interviewers={interviewers}
+    // interviewer={'2'}
+    onSave={action("onSave")}
+    onCancel={action("onCancel")}
     />
   ))
