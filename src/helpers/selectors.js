@@ -22,3 +22,30 @@ export function getAppointmentsForDay(state, day) {
 
   return result;
 }
+
+
+// given an object that contains an interviewer, returns an object that contains interview data
+export function getInterview(state, interview) {
+
+  // PARAMS: in the case of no interview, interview will be passed as null.
+  if (interview) {
+    
+    // student info
+    const interviewStudent = interview.student;
+
+    // interviewer info
+    const interviewerID = interview.interviewer;
+    const interviewerObj = state.interviewers[interviewerID];
+
+    // interview info
+    const interviewObj = {
+      interviewer: {
+        ...interviewerObj
+      },
+      student: interviewStudent
+    };
+    return interviewObj;
+  }
+
+  return null;
+} 

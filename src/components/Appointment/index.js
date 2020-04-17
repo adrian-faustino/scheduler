@@ -12,6 +12,7 @@ export default function Appointment(props) {
     <div>
       <Header time={time}/>
       {interview ? <Show {...interview }/> : <Empty />}
+      {console.log('appointment...', id, time, interview)}
     </div>
   )
 }
