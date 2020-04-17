@@ -11,6 +11,7 @@ import Appointment from "components/Appointment/index.js";
 // helpers
 import { getAppointmentsForDay } from "helpers/selectors";
 
+
 export default function Application(props) {
   const [state, setState] = useState({
     day: 'Monday',
@@ -18,7 +19,7 @@ export default function Application(props) {
     appointments: {}
   });
 
-  const { day, days } = state;
+  const { day, days, appointments } = state;
 
   // axios request for the day component on the left side nav bar
   const setDay = day => setState({...state, day});
@@ -38,16 +39,8 @@ export default function Application(props) {
     });
   }, []);
 
-  // axios request for the appointmnets (main component)
-  // const reqDays = axios.get('/api/days');
-  // const reqAppointments = axios.get('//api/appointments');
-  // Promise.all([reqDays, reqAppointments]).then(res => {
-  //   console.log(res);
-  // });
-
-
   // Spread appointment data for rendering
-  const appointments_ = appointments.map(appointment => {
+  const appointments_ = getAppointmentsForDay(state, day).map(appointment => {
     return (
       <Appointment key={appointment.id}
       {...appointment}
