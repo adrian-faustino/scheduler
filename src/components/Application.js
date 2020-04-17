@@ -57,6 +57,8 @@ export default function Application(props) {
 
   const schedule = appointments_.map((appointment) => {
     console.log(appointment.interview, "<== appointment");
+
+    // PARAMS: if no appointment, appointment.interview will be null
     const interview = getInterview(state, appointment.interview);
 
     return (
@@ -92,7 +94,7 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        {/* {appointments_} */}
+        {schedule}
       </section>
       
     </main>
