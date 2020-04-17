@@ -1,3 +1,4 @@
+// returns an array with the appointmnets for that day
 export function getAppointmentsForDay(state, day) {
   let result = [];
   const currentDayObj = state.days.find(dayObj => dayObj.name === day);
@@ -14,9 +15,6 @@ export function getAppointmentsForDay(state, day) {
   if (appointmentArr.length === 0) {
     return result;
   }
-
-
-
 
   result = appointmentArr.map(appID => {
     return state.appointments[appID];
