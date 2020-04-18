@@ -28,11 +28,12 @@ export default function Appointment(props) {
   };
 
   // HELPER FUNCTIONS
-  function save(name, interviewer) {
+  function onSave(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     }
+    bookInterview(id, interview);
   }
 
   // RENDER
@@ -48,9 +49,9 @@ export default function Appointment(props) {
 
       {mode === 'CREATE' && (
       <Form 
+      onSave={onSave}
       interviewers={interviewers}
-      onCancel={e => onCancel()}
-      onSave={'save'} />)}
+      onCancel={e => onCancel()} />)}
     </div>
   )
 }

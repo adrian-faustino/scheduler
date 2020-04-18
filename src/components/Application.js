@@ -44,7 +44,7 @@ export default function Application(props) {
 
   // HELPER FUNCTIONS
   function bookInterview(id, interview) {
-    console.log(id, interview);
+    console.log(id, interview, 'Book interview!');
    }
 
 
@@ -62,7 +62,7 @@ export default function Application(props) {
 
     return (
       <Appointment
-        interviewArr={interviewArr}
+        bookInterview={bookInterview}
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
