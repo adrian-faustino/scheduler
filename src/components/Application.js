@@ -54,12 +54,6 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    // save data locally
-    setState({
-      ...state,
-      appointments
-    });
-
     return new Promise((resolve, reject) => {
       // save data to db
        axios({
@@ -67,10 +61,27 @@ export default function Application(props) {
         url: `http://localhost:8001/api/appointments/${id}`,
         data: appointment
       }).then(() => {
+        // save data locally
+        setState({
+          ...state,
+          appointments
+        });
         resolve();
       });
     });
-   }
+  }
+
+  function cancelInterview(id) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'DELETE',
+        url: `http://localhost:8001/api/appointments/${id}`,
+        data: ''
+      }).then(() => {
+        resolve();
+      });
+    });
+  }
 
 
   // this is an array of interviewer objects
@@ -88,6 +99,7 @@ export default function Application(props) {
     return (
       <Appointment
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
