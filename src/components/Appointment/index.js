@@ -53,6 +53,10 @@ export default function Appointment(props) {
     onDelete(id);
   }
 
+  function onEdit() {
+    transition('EDIT');
+  }
+
   // RENDER
   return (
     <div>
@@ -61,6 +65,7 @@ export default function Appointment(props) {
 
       {mode === 'SHOW' && (
       <Show
+      onEdit={e => onEdit()}
       onDeleteConfirm={e => onDeleteConfirm()}
       student={interview.student}
       interviewer={interview.interviewer} />)}
@@ -88,6 +93,13 @@ export default function Appointment(props) {
         onCancel={onCancel}
         onConfirm={onConfirm}
         message={'Are you sure you would like to delete'}/>
+      )}
+
+      {mode === 'EDIT' && (
+        <Form 
+        name={interview.student}
+        interviewer={interview.interviewer.id}
+        interviewers={interviewers} />
       )}
       
     </div>

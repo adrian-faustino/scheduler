@@ -44,6 +44,7 @@ export function getInterview(state, interview) {
       },
       student: interviewStudent
     };
+
     return interviewObj;
   }
 
