@@ -55,7 +55,7 @@ export function getInterview(state, interview) {
 export function getInterviewersForDay(state, currentDay) {
   // return if empty
   if (Object.keys(state.interviewers).length === 0) {
-    return;
+    return [];
   }
 
   // get the interviewers for that day
@@ -70,6 +70,6 @@ export function getInterviewersForDay(state, currentDay) {
   let result = interviewerArr.map(id => {
     return state.interviewers[id];
   });
-
+  console.log('Here', result)
   return result;
 }

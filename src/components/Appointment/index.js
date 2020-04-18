@@ -15,7 +15,7 @@ const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
 
 export default function Appointment(props) {
-  const { id, time, interview} = props;
+  const { id, time, interview, interviewers } = props;
   const { mode, transition, back } = useVisualMode( interview ? 'SHOW' : 'EMPTY' );
 
   // EVENT HANDLERS
@@ -40,7 +40,7 @@ export default function Appointment(props) {
 
       {mode === 'CREATE' && (
       <Form 
-      interviewers={[]}
+      interviewers={interviewers}
       onCancel={e => onCancel()}
       onSave={'save'} />)}
     </div>
