@@ -54,9 +54,21 @@ export default function Application(props) {
       [id]: appointment
     };
 
+    // save data locally
     setState({
       ...state,
       appointments
+    });
+
+    return new Promise((resolve, reject) => {
+      // save data to db
+       axios({
+        method: 'PUT',
+        url: `http://localhost:8001/api/appointments/${id}`,
+        data: appointment
+      }).then(() => {
+        resolve();
+      });
     });
    }
 
