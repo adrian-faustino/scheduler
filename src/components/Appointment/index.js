@@ -5,6 +5,7 @@ import React from 'react'
 import Header from './Header.js';
 import Show from './Show.js';
 import Empty from './Empty.js';
+import Form from './Form.js';
 
 // hooks
 import useVisualMode from 'hooks/useVisualMode';
@@ -15,21 +16,33 @@ const SHOW = 'SHOW';
 
 export default function Appointment(props) {
   const { id, time, interview} = props;
-  const { mode, transition, back } = useVisualMode( interview ? SHOW : EMPTY );
+  const { mode, transition, back } = useVisualMode( interview ? 'SHOW' : 'EMPTY' );
 
   // EVENT HANDLERS
-  
+  const onAdd = () => {
+    transition('CREATE');
+  };
+
+  const onCancel = () => {
+    back();
+  };
 
   // RENDER
   return (
     <div>
       <Header time={time}/>
-      {mode === EMPTY && <Empty onAdd={props.onAdd} />}
-      {mode === SHOW && (
+      {mode === 'EMPTY' && <Empty onAdd={e => onAdd()} />}
+
+      {mode === 'SHOW' && (
       <Show
-      student={props.interview.student}
-      interviewer={props.interview.interviewer}
-      />)}
+      student={interview.student}
+      interviewer={interview.interviewer} />)}
+
+      {mode === 'CREATE' && (
+      <Form 
+      interviewers={[]}
+      onCancel={e => onCancel()}
+      onSave={'save'} />)}
     </div>
   )
 }
