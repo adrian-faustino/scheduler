@@ -9,7 +9,7 @@ import DayList from "components/DayList";
 import Appointment from "components/Appointment/index.js";
 
 // helpers
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 export default function Application(props) {
 
@@ -46,7 +46,6 @@ export default function Application(props) {
   // spread appointments for rendering
   const appointments_ = getAppointmentsForDay(state, day);
   const schedule = appointments_.map((appointment) => {
-    console.log(appointment.interview, "<== appointment");
 
     // PARAMS: if no appointment, appointment.interview will be null
     const interview = getInterview(state, appointment.interview);
@@ -61,6 +60,8 @@ export default function Application(props) {
     );
   });
 
+  // EVENT HANDLERS
+  getInterviewersForDay(state, day);
 
   // RENDER
   return (

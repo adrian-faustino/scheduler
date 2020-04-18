@@ -29,7 +29,7 @@ export function getInterview(state, interview) {
 
   // PARAMS: in the case of no interview, interview will be passed as null.
   if (interview) {
-    
+
     // student info
     const interviewStudent = interview.student;
 
@@ -49,3 +49,16 @@ export function getInterview(state, interview) {
 
   return null;
 } 
+
+
+// new
+export function getInterviewersForDay(state, currentDay) {
+  state.days.forEach(day => {
+    if (day.name === currentDay) {
+      console.log(day.interviewers);
+      return day.interviewers;
+    }
+  });
+
+  return [];
+}
