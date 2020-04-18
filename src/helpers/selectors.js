@@ -70,6 +70,6 @@ export function getInterviewersForDay(state, currentDay) {
   let result = interviewerArr.map(id => {
     return state.interviewers[id];
   });
-  console.log('Here', result)
+
   return result;
 }
