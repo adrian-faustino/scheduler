@@ -25,7 +25,7 @@ export default function Application(props) {
   // axios request for the day component on the left side nav bar
   const setDay = day => setState({...state, day});
   
-  // GET request
+  // GET request to set our initial state data
   useEffect(() => {
     const getDays = axios.get('/api/days');
     const getAppointments = axios.get('/api/appointments');
@@ -42,6 +42,11 @@ export default function Application(props) {
     });
   }, []);
 
+  // HELPER FUNCTIONS
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+   }
+
 
   // this is an array of interviewer objects
   const interviewerArr = getInterviewersForDay(state, day);
@@ -57,6 +62,7 @@ export default function Application(props) {
 
     return (
       <Appointment
+        interviewArr={interviewArr}
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}

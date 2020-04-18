@@ -15,7 +15,7 @@ const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
 
 export default function Appointment(props) {
-  const { id, time, interview, interviewers } = props;
+  const { id, time, interview, interviewers, bookInterview } = props;
   const { mode, transition, back } = useVisualMode( interview ? 'SHOW' : 'EMPTY' );
 
   // EVENT HANDLERS
@@ -26,6 +26,14 @@ export default function Appointment(props) {
   const onCancel = () => {
     back();
   };
+
+  // HELPER FUNCTIONS
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    }
+  }
 
   // RENDER
   return (
