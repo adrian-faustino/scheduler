@@ -11,15 +11,15 @@ import Appointment from "components/Appointment/index.js";
 // helpers
 import { getAppointmentsForDay, getInterview } from "helpers/selectors";
 
-
 export default function Application(props) {
+
+  // States
   const [state, setState] = useState({
     day: 'Monday',
     days: [],
     appointments: {},
     interviewers: {}
   });
-
   const { day, days, appointments } = state;
 
   // axios request for the day component on the left side nav bar
@@ -42,19 +42,9 @@ export default function Application(props) {
     });
   }, []);
 
-  // Spread appointment data for rendering
-  // const appointments_ = getAppointmentsForDay(state, day).map(appointment => {
-  //   return (
-  //     <Appointment key={appointment.id}
-  //     {...appointment}
-  //     />
-  //   );
-  // });
 
-
-  // new
+  // spread appointments for rendering
   const appointments_ = getAppointmentsForDay(state, day);
-
   const schedule = appointments_.map((appointment) => {
     console.log(appointment.interview, "<== appointment");
 
@@ -72,6 +62,7 @@ export default function Application(props) {
   });
 
 
+  // RENDER
   return (
     <main className="layout">
       <section className="sidebar">

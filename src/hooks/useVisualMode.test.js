@@ -46,3 +46,17 @@ test("useVisualMode should not return to previous mode if already at initial", (
   act(() => result.current.back());
   expect(result.current.mode).toBe(FIRST);
 });
+
+// testing: transition with replace => replace existing mode in the history with a new one (TLDR: Allows us to jump from 1st to 3rd and 3rd to 1st mode etc)
+test("useVisualMode should replace the current mode", () => {
+  const { result } = renderHook(() => useVisualMode(FIRST));
+
+  act(() => result.current.transition(SECOND));
+  expect(result.current.mode).toBe(SECOND);
+
+  act(() => result.current.transition(THIRD, true));
+  expect(result.current.mode).toBe(THIRD);
+
+  act(() => result.current.back());
+  expect(result.current.mode).toBe(FIRST);
+});
