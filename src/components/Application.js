@@ -22,6 +22,9 @@ export default function Application(props) {
   });
   const { day, days, appointments } = state;
 
+  // set interviewers - useEffect here?
+  getInterviewersForDay(state, day);
+
   // axios request for the day component on the left side nav bar
   const setDay = day => setState({...state, day});
   
@@ -44,6 +47,8 @@ export default function Application(props) {
 
 
   // spread appointments for rendering
+
+  // this is an array of appointment objects
   const appointments_ = getAppointmentsForDay(state, day);
   const schedule = appointments_.map((appointment) => {
 
@@ -56,12 +61,11 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={'changelater'}
       />
     );
   });
 
-  // EVENT HANDLERS
-  getInterviewersForDay(state, day);
 
   // RENDER
   return (

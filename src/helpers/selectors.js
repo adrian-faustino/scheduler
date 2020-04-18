@@ -51,14 +51,25 @@ export function getInterview(state, interview) {
 } 
 
 
-// new
+// returns an array of objects containing interviewer data
 export function getInterviewersForDay(state, currentDay) {
+  // return if empty
+  if (Object.keys(state.interviewers).length === 0) {
+    return;
+  }
+
+  // get the interviewers for that day
+  let interviewerArr;
   state.days.forEach(day => {
     if (day.name === currentDay) {
-      console.log(day.interviewers);
-      return day.interviewers;
+      interviewerArr = day.interviewers;
     }
   });
 
-  return [];
+  // map each interviewer ID based on interviewer info data (object)
+  let result = interviewerArr.map(id => {
+    return state.interviewers[id];
+  });
+
+  return result;
 }
