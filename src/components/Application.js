@@ -67,6 +67,8 @@ export default function Application(props) {
           appointments
         });
         resolve();
+      }).catch(() => {
+        reject('ERROR_SAVE');
       });
     });
   }
@@ -79,6 +81,8 @@ export default function Application(props) {
         data: ''
       }).then(() => {
         resolve();
+      }).catch(() => {
+        reject('ERROR_DELETE')
       });
     });
   }
