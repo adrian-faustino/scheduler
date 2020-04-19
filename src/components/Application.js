@@ -10,91 +10,24 @@ import Appointment from "components/Appointment/index.js";
 
 // helpers
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
-
-  // States
-  const [state, setState] = useState({
-    day: 'Monday',
-    days: [],
-    appointments: {},
-    interviewers: {}
-  });
-  const { day, days, appointments } = state;
-
-  // axios request for the day component on the left side nav bar
-  const setDay = day => setState({...state, day});
-  
-  // GET request to set our initial state data
-  useEffect(() => {
-    const getDays = axios.get('/api/days');
-    const getAppointments = axios.get('/api/appointments');
-    const getInterviewers = axios.get('/api/interviewers');
-  
-    Promise.all([getDays, getAppointments, getInterviewers]).then(res => {
-      setState(prev => {
-        return {...prev,
-          days: res[0].data,
-          appointments: res[1].data,
-          interviewers: res[2].data
-        };
-      });
-    });
-  }, []);
-
-  // HELPER FUNCTIONS
-  function bookInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-
-    return new Promise((resolve, reject) => {
-      // save data to db
-       axios({
-        method: 'PUT',
-        url: `http://localhost:8001/api/appointments/${id}`,
-        data: appointment
-      }).then(() => {
-        // save data locally
-        setState({
-          ...state,
-          appointments
-        });
-        resolve();
-      }).catch(() => {
-        reject('ERROR_SAVE');
-      });
-    });
-  }
-
-  function cancelInterview(id) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: 'DELETE',
-        url: `http://localhost:8001/api/appointments/${id}`,
-        data: ''
-      }).then(() => {
-        resolve();
-      }).catch(() => {
-        reject('ERROR_DELETE')
-      });
-    });
-  }
-
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview
+  } = useApplicationData();
 
   // this is an array of interviewer objects
-  const interviewerArr = getInterviewersForDay(state, day);
+  const interviewerArr = getInterviewersForDay(state, state.day);
 
 
   // spread appointments for rendering
   // this is an array of appointment objects
-  const appointments_ = getAppointmentsForDay(state, day);
+  const appointments_ = getAppointmentsForDay(state, state.day);
+  
   const schedule = appointments_.map((appointment) => {
 
     // PARAMS: if no appointment, appointment.interview will be null
@@ -113,7 +46,6 @@ export default function Application(props) {
     );
   });
 
-
   // RENDER
   return (
     <main className="layout">
@@ -126,9 +58,9 @@ export default function Application(props) {
       <hr className="sidebar__separator sidebar--centered" />
       <nav className="sidebar__menu">
         <DayList
-        day={day}
+        day={state.day}
         setDay={day => setDay(day)}
-        days={days} />
+        days={state.days} />
       </nav>
       <img
         className="sidebar__lhl sidebar--centered"
