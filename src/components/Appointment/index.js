@@ -38,7 +38,7 @@ export default function Appointment(props) {
       .then(() => {
       transition('SHOW');
     }).catch(e => {
-      transition(e);
+      transition(e, true);
     });
   }
 
@@ -52,7 +52,7 @@ export default function Appointment(props) {
       .then(() => {
       transition('EMPTY');
     }).catch(e => {
-      transition(e);
+      transition(e, true);
     });
   }
 
@@ -113,11 +113,15 @@ export default function Appointment(props) {
 
       {/* error modes */}
       {mode === 'ERROR_SAVE' && (
-        <Error message={'Could not save appointment.'} />
+        <Error 
+        onClose={e => onCancel()}
+        message={'Could not save appointment.'} />
       )}
 
       {mode === 'ERROR_DELETE' && (
-        <Error message={'Could not delete appointment.'}/>
+        <Error 
+        onClose={e => onCancel()}
+        message={'Could not delete appointment.'}/>
       )}
       
     </div>
