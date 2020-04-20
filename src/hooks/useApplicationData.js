@@ -9,7 +9,6 @@ export default function useApplicationData() {
     appointments: {},
     interviewers: {}
   });
-  const { day, days, appointments } = state;
 
   // axios request for the day component on the left side nav bar
   const setDay = day => setState({...state, day});
@@ -30,6 +29,31 @@ export default function useApplicationData() {
       });
     });
   }, []);
+
+  // update spots remaining
+  const getDays = (days) => {
+    const newDaysArr = [];
+    for (let day of days) {
+      let spots = 0;
+
+      for (let appointment of day.appointments) {
+        if (state.appointments[appointment].interview === null) {
+          spots++;
+        } 
+      }
+      
+      newDaysArr.push({...day, spots})
+    }
+
+    return newDaysArr;
+  };
+
+  useEffect(() => {
+    const days = getDays(state.days);
+
+    setState(prev => ({...prev, days }));
+  }, [state.appointments]);
+
 
   // HELPER FUNCTIONS
   function bookInterview(id, interview) {
@@ -63,12 +87,27 @@ export default function useApplicationData() {
   }
 
   function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
     return new Promise((resolve, reject) => {
       axios({
         method: 'DELETE',
         url: `http://localhost:8001/api/appointments/${id}`,
         data: ''
       }).then(() => {
+        setState(prev => {
+          return {...prev,
+            appointments
+          }
+        });
         resolve();
       }).catch(() => {
         reject('ERROR_DELETE')
