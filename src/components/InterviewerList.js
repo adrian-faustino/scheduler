@@ -1,8 +1,15 @@
 import React from 'react'
 import InterviewerListItem from './InterviewerListItem';
 import "./InterviewerList.scss";
+import PropTypes from 'prop-types';
+
 
 export default function InterviewerList(props) {
+  InterviewerList.propTypes = {
+    selected: PropTypes.number,
+    setInterviewer: PropTypes.func.isRequired
+  };
+
   const list = props.interviewers.map(interviewer => {
     return (<InterviewerListItem 
       key={interviewer.id}
