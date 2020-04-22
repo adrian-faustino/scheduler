@@ -66,7 +66,7 @@ export default function Appointment(props) {
 
   // RENDER
   return (
-    <div>
+    <article data-testid="appointment">
       <Header time={time}/>
       {mode === 'EMPTY' && <Empty onAdd={e => onAdd()} />}
 
@@ -85,13 +85,13 @@ export default function Appointment(props) {
 
       {mode === 'SAVING' && (
         <Status 
-        message={mode}
+        message={'Saving'}
         />
       )}
       
       {mode === 'DELETING' && (
         <Status 
-        message={mode}
+        message={'Deleting'}
         />
       )}
 
@@ -99,7 +99,7 @@ export default function Appointment(props) {
         <Confirm 
         onCancel={onCancel}
         onConfirm={onConfirm}
-        message={'Are you sure you would like to delete'}/>
+        message={'Are you sure you would like to delete?'}/>
       )}
 
       {mode === 'EDIT' && (
@@ -124,6 +124,6 @@ export default function Appointment(props) {
         message={'Could not delete appointment.'}/>
       )}
       
-    </div>
+    </article>
   )
 }
