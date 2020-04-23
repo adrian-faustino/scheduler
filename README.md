@@ -1,7 +1,7 @@
 # Outline and Stack
-This is an application that allows users to book and cancel interviews. It is built using React on the front end and using axios to make requests to an API served with NodeJS and Express on the back end with a PostgreSQL database.
+This is an application that allows users to book and cancel interviews. It is built using **React** on the front end and using axios to make requests to an API served with NodeJS and Express on the back end with a PostgreSQL database.
 
-I use Storybook to develop UI components and use Jest for testing.
+I use **Storybook** to develop UI components and use **Jest** for testing.
 
 ## Features
 
