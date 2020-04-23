@@ -14,7 +14,7 @@ import Error from './Error';
 import useVisualMode from 'hooks/useVisualMode';
 
 export default function Appointment(props) {
-  const { id, time, interview, interviewers, bookInterview, cancelInterview } = props;
+  const { id, time, interview, interviewers, bookInterview, cancelInterview, key_ } = props;
   const { mode, transition, back } = useVisualMode( interview ? 'SHOW' : 'EMPTY' );
 
   // EVENT HANDLERS
@@ -63,12 +63,12 @@ export default function Appointment(props) {
   function onEdit() {
     transition('EDIT');
   }
-
+ 
   // RENDER
   return (
     <article data-testid="appointment">
       <Header time={time}/>
-      {mode === 'EMPTY' && <Empty onAdd={e => onAdd()} />}
+      {mode === 'EMPTY' && <Empty key_={key_} onAdd={e => onAdd()} />}
 
       {mode === 'SHOW' && (
       <Show
