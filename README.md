@@ -1,23 +1,4 @@
-# Interview Scheduler
+This app is built with using React on the front end, using axios to make requests to an API served with NodeJS and Express on the back end.
 
-## Setup
+I use Storybook to develop UI components and use Jest for testing.
 
-Install dependencies with `npm install`.
-
-## Running Webpack Development Server
-
-```sh
-npm start
-```
-
-## Running Jest Test Framework
-
-```sh
-npm test
-```
-
-## Running Storybook Visual Testbed
-
-```sh
-npm run storybook
-```
